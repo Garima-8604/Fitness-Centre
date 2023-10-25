@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head th:replace = "~{/fragments/head}"></head>
+
+
+<body>
+    <nav th:replace = "~{/fragments/nav :: nav-admin}"></nav>
+
+
+
+
+    <div class="container">
+        <h1 class="display-2">Centres</h1>
+        <a href="/admin/centres/add" class="btn btn-primary mb-5">Add new</a>
+
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+
+
+        <div th:if="${!centres.empty}">
+            <table class="table" id="centres">
+                <tr>
+                    <th>City</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="centre: ${centres}">
+                    <td th:text="${centre.city}"></td>
+                    <td><a th:href="@{'/admin/centres/edit/' + ${centre.id}}">Edit</a></td>
+                    <td><a th:href="@{'/admin/centres/delete/' + ${centre.id}}" class="confirmDeletion">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:unless="${!centres.empty}">
+            <h4 class="display-4">There are no centres at the moment</h4>
+        </div>
+    </div>
+
+    <div th:replace = "~{/fragments/footer}"></div>
+
+
+
+</body>
+
+
+
+
+</html>

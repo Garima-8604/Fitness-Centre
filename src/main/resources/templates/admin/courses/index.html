@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head th:replace = "~{/fragments/head}"></head>
+
+
+<body>
+    <nav th:replace = "~{/fragments/nav :: nav-admin}"></nav>
+
+
+
+
+    <div class="container">
+        <h1 class="display-2">Courses</h1>
+        <a href="/admin/courses/add" class="btn btn-primary mb-5">Add new</a>
+
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+
+
+        <div th:if="${!courses.empty}">
+            <table class="table" id="courses">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Start Date</th>
+                    <th>Duration</th>
+                    <th>Trainer Id</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="course: ${courses}">
+                    <td th:text="${course.name}"></td>
+                    <td th:text="${course.image}"></td>
+                    <td th:text="${course.category_id}"></td>
+                    <td th:text="${course.price}"></td>
+                    <td th:text="${course.start_date}"></td>
+                    <td th:text="${course.duration}"></td>
+                    <td th:text="${course.trainer_id}"></td>
+                    <td><a th:href="@{'/admin/courses/edit/' + ${course.id}}">Edit</a></td>
+                    <td><a th:href="@{'/admin/courses/delete/' + ${course.id}}" class="confirmDeletion">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:unless="${!courses.empty}">
+            <p>there are no courses</p>
+            <h4 class="display-4">There are no courses at the moment</h4>
+        </div>
+    </div>
+
+    <div th:replace = "~{/fragments/footer}"></div>
+
+ 
+
+</body>
+
+
+
+
+</html>
