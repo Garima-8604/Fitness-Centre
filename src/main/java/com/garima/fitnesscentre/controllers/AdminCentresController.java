@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.garima.fitnesscentre.models.CentreRespository;
+import com.garima.fitnesscentre.models.CentreRepository;
 
 import com.garima.fitnesscentre.models.data.Centre;
 
@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 public class AdminCentresController {
 
     @Autowired
-    private CentreRespository centreRepo;
+    private CentreRepository centreRepo;
 
     @GetMapping
     public String index(Model model)

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.garima.fitnesscentre.models.data.Centre;
 
 
-public interface CentreRespository extends JpaRepository<Centre, Integer>{
+public interface CentreRepository extends JpaRepository<Centre, Integer>{
     Centre findByCity(String city);
 
     @Query("SELECT p FROM Centre p WHERE p.id != :id and p.city = :city")

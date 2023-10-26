@@ -7,11 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.garima.fitnesscentre.models.CentreRespository;
+import com.garima.fitnesscentre.models.CentreRepository;
 import com.garima.fitnesscentre.models.TrainerRepository;
 
 import com.garima.fitnesscentre.models.data.Centre;
@@ -29,7 +30,7 @@ public class AdminTrainersController {
     private TrainerRepository trainerRepo;
 
     @Autowired
-    private CentreRespository centreRepo;
+    private CentreRepository centreRepo;
 
     @GetMapping
     public String index(Model model)
@@ -64,6 +65,55 @@ public class AdminTrainersController {
     
 
         return "redirect:/admin/trainers/add";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable int id, Model model)
+    {
+        List<Centre> centres = centreRepo.findAll();
+        model.addAttribute("centres", centres);
+
+        Trainer trainer = trainerRepo.getReferenceById(id);
+        model.addAttribute("trainer", trainer);
+
+        return "admin/trainers/edit";
+
+
+    }
+
+    @PostMapping("/edit")
+    public String edit(@Valid Trainer trainer, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model)
+    {
+
+        List<Centre> centres = centreRepo.findAll();
+        model.addAttribute("centres", centres);
+        Trainer trainerCurrent = trainerRepo.getReferenceById(trainer.getId());
+
+        if(bindingResult.hasErrors())
+        {
+            model.addAttribute("trainer", trainerCurrent.getCity());
+            return "admin/trainers/edit";
+        }
+        redirectAttributes.addFlashAttribute("message", "Trainer edited");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+
+        
+
+        trainerRepo.save(trainer);
+
+        return "redirect:/admin/trainers/edit/" + trainer.getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String edit(@PathVariable int id, RedirectAttributes redirectAttributes)
+    {
+        trainerRepo.deleteById(id);
+
+        redirectAttributes.addFlashAttribute("message", "Trainer Deleted");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+
+        return "redirect:/admin/trainers";
+
     }
 
 

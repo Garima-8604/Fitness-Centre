@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head th:replace = "~{/fragments/head}"></head>
+
+
+<body>
+    <nav th:replace = "~{/fragments/nav :: nav-admin}"></nav>
+
+
+
+
+    <div class="container">
+        <h1 class="display-2" th:text="'Edit trainer ' + ( ${trainerName} ?: ${trainer.name} )"></h1>
+        <a href="/admin/trainers" class="btn btn-primary mb-5">Back to Trainers</a>
+        
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+
+        <form th:action="@{/admin/trainers/edit}" th:object="${trainer}" method="post">
+
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                There are errors
+            </div>
+
+            <div class="form-group">
+                <label for="">Name</label>
+                <input type="text" class="form-control" th:field="*{name}" placeholder="Name">
+                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="">Gender</label>
+                <input type="text" class="form-control" th:field="*{gender}" placeholder="Male/Female/Other">
+                <span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+            </div>
+            <div class="form-group">
+                <label for="">City</label>
+                <input type="text" class="form-control" th:field="*{city}" placeholder="City">
+                <span class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+            </div>
+            <div class="form-group">
+                <label for="">State</label>
+                <input type="text" class="form-control" th:field="*{state}" placeholder="State">
+                <span class="error" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Phone Number</label>
+                <input type="text" class="form-control" th:field="*{phoneNumber}" placeholder="10 digit number">
+                <span class="error" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Centre</label>
+                <select th:field="*{centreId}" class="form-control">
+                    <option th:value="0">Choose a Centre</option>
+                    <option th:each="cent: ${centres}" th:value="${cent.id}" th:text="${cent.city}"></option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('centreId')}" th:errors="*{centreId}"></span>
+
+            </div>
+
+            <input type="hidden" th:field="*{id}" th:value="${trainer.id}">
+
+            <button class="btn btn-danger mb-5">Edit</button>
+        </form>
+
+ 
+    </div>
+
+    <div th:replace = "~{/fragments/footer}"></div>
+
+
+
+
+</html>
