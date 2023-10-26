@@ -32,12 +32,14 @@
                 </tr>
                 <tr th:each="course: ${courses}">
                     <td th:text="${course.name}"></td>
-                    <td th:text="${course.image}"></td>
-                    <td th:text="${course.category_id}"></td>
-                    <td th:text="${course.price}"></td>
-                    <td th:text="${course.start_date}"></td>
-                    <td th:text="${course.duration}"></td>
-                    <td th:text="${course.trainer_id}"></td>
+                    <td>
+                        <img style="width: 100px;" th:src="@{'/media/' + ${course.image}}" alt="">
+                    </td>
+                    <td th:text="${cats[__${course.categoryId}__]} "></td>
+                    <td th:text="'Rs. ' + ${course.price}"></td>
+                    <td th:text="${course.startDate}"></td>
+                    <td th:text="${course.duration} + ' months'"></td>
+                    <td th:text="${trains[__${course.trainerId}__]} "></td>
                     <td><a th:href="@{'/admin/courses/edit/' + ${course.id}}">Edit</a></td>
                     <td><a th:href="@{'/admin/courses/delete/' + ${course.id}}" class="confirmDeletion">Delete</a></td>
                 </tr>

@@ -35,7 +35,9 @@
                 <span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
             </div>
             <div class="form-group">
-                <input type="file" class="form-control" th:name="file">
+                <label for="">Image</label>
+                <input type="file" class="form-control" th:name="file" th:id="file">
+                <img class="mt-2" src="#" alt="" id="imgPreview1">
             </div>
             <div class="form-group">
                 <label for="">Price</label>
@@ -62,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label for="">Start Date</label>
-                <input type="text" class="form-control" th:field="*{startDate}" placeholder="like 25-10-2023">
+                <input type="text" class="form-control" th:field="*{startDate}" placeholder="like 25-10-23">
                 <span class="error" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
             </div>
             <div class="form-group">
@@ -79,7 +81,18 @@
 
     <div th:replace = "~{/fragments/footer}"></div>
 
+    <script>
 
+        $(function () {
+            $("#file").change(function () {
+                readURL(this, '1');
+                
+            });
+
+            
+        });
+    </script>
+</body>
 
 
 </html>

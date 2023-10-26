@@ -85,19 +85,16 @@ public class AdminTrainersController {
     public String edit(@Valid Trainer trainer, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model)
     {
 
-        List<Centre> centres = centreRepo.findAll();
-        model.addAttribute("centres", centres);
+
         Trainer trainerCurrent = trainerRepo.getReferenceById(trainer.getId());
 
         if(bindingResult.hasErrors())
         {
-            model.addAttribute("trainer", trainerCurrent.getCity());
+            model.addAttribute("trainer", trainerCurrent.getName());
             return "admin/trainers/edit";
         }
         redirectAttributes.addFlashAttribute("message", "Trainer edited");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-
-        
 
         trainerRepo.save(trainer);
 
