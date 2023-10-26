@@ -81,7 +81,7 @@ public class AdminTrainersController {
 
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{id}")
     public String edit(@Valid Trainer trainer, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model)
     {
 
@@ -102,7 +102,7 @@ public class AdminTrainersController {
     }
 
     @GetMapping("/delete/{id}")
-    public String edit(@PathVariable int id, RedirectAttributes redirectAttributes)
+    public String delete(@PathVariable int id, RedirectAttributes redirectAttributes)
     {
         trainerRepo.deleteById(id);
 

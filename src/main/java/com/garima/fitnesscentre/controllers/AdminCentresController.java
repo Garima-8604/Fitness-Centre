@@ -116,7 +116,7 @@ public class AdminCentresController {
     }
 
     @GetMapping("/delete/{id}")
-    public String edit(@PathVariable int id, RedirectAttributes redirectAttributes)
+    public String delete(@PathVariable int id, RedirectAttributes redirectAttributes)
     {
         centreRepo.deleteById(id);
 

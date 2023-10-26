@@ -114,7 +114,7 @@ public class AdminCategoriesController {
     }
 
     @GetMapping("/delete/{id}")
-    public String edit(@PathVariable int id, RedirectAttributes redirectAttributes)
+    public String delete(@PathVariable int id, RedirectAttributes redirectAttributes)
     {
         categoryRepo.deleteById(id);
 
