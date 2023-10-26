@@ -2,6 +2,8 @@ package com.garima.fitnesscentre.models;
 
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +18,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer>{
     Course findBySlug(int id, String slug, String startDate, int duration);
 
     Page<Course> findAll(Pageable pageable);
+
+    List<Course> findAllByCategoryId(String categoryId, Pageable pageable);
+
+    long countByCategoryId(String categoryId);
 
 }
